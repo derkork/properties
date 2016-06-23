@@ -17,6 +17,7 @@ import (
 	"strings"
 	"time"
 	"unicode/utf8"
+	"github.com/pmylund/sortutil"
 )
 
 // ErrorHandlerFunc defines the type of function which handles failures
@@ -423,6 +424,14 @@ func (p *Properties) MustGetString(key string) string {
 	}
 	ErrorHandler(invalidKeyError(key))
 	panic("ErrorHandler should exit")
+}
+
+
+// ----------------------------------------------------------------------------
+
+// Sort sorts the file case insensitively.
+func (p *Properties) Sort() {
+	sortutil.CiAsc(p.k)
 }
 
 // ----------------------------------------------------------------------------
